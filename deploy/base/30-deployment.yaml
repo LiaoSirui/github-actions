@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: websites
+spec:
+  replicas: 1
+  template:
+    spec:
+      volumes: []
+      serviceAccountName: websites
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: In
+                    values:
+                      - ""
+                      - "true"
+                      - "yes"
+      containers:
+        - name: image
+          image: "ghcr.io/liaosirui/website-github-actions:0.0.0"
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "10Mi"
+            limits:
+              cpu: "300m"
+              memory: "512Mi"
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          env: []
+          volumeMounts: []

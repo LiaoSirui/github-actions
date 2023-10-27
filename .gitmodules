@@ -1,0 +1,6 @@
+[submodule "libs/liaosirui.com"]
+	path = libs/liaosirui.com
+	url = git@github.com:LiaoSirui/liaosirui.com.git
+[submodule "libs/resume.liaosirui.com"]
+	path = libs/resume.liaosirui.com
+	url = git@github.com:LiaoSirui/resume.liaosirui.com.git

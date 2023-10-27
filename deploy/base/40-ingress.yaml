@@ -1,0 +1,50 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: websites
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    cert-manager.io/cluster-issuer: cert-http01
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - liaosirui.com
+      secretName: https-certs
+    - hosts:
+        - www.liaosirui.com
+      secretName: https-www-certs
+    - hosts:
+        - resume.liaosirui.com
+      secretName: https-resume-certs
+  rules:
+    - host: liaosirui.com
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: websites
+                port:
+                  number: 80
+    - host: www.liaosirui.com
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: websites
+                port:
+                  number: 80
+    - host: resume.liaosirui.com
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: websites
+                port:
+                  number: 80
