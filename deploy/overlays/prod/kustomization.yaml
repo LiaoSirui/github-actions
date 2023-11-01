@@ -8,4 +8,4 @@ namespace: websites
 
 images:
   - name: ghcr.io/liaosirui/website-github-actions
-    newTag: sha-3fb34f54
+    newTag: sha-d40339e9
